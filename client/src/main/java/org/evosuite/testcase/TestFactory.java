@@ -79,6 +79,8 @@ import com.googlecode.gentyref.GenericTypeReflector;
  * @author Gordon Fraser
  *
  */
+
+// [EMMA] This class is central to generting test cases and statements
 public class TestFactory {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestFactory.class);
@@ -739,6 +741,7 @@ public class TestFactory {
 		} else if (clazz.isPrimitive() || clazz.isClass()
 		        || EnvironmentStatements.isEnvironmentData( clazz.getRawClass())) {
 
+			// [EMMA] Create primitive	for a variable eventually passed to a param
 			return createPrimitive(test, clazz, position, recursionDepth);
 
 		} else if (clazz.isString()) {
@@ -1132,6 +1135,8 @@ public class TestFactory {
 				        "Cannot instantiate a class with a class");
 			}
 		}
+
+		// [EMMA] Create primitive for a variable eventually passed to a param by getting random statment, which draws from the constant pool (see PrimitiveStatement)
 		Statement st = PrimitiveStatement.getRandomStatement(test, clazz,
 		                                                              position);
 		VariableReference ret = test.addStatement(st, position);
@@ -1498,6 +1503,7 @@ public class TestFactory {
 			if (excludeCalleeGenerators) {
 				generatorRefToExclude = exclude;
 			}
+			// [EMMA] Attempt to generate a new variable (eventually to be used as a parameter?)
 			VariableReference reference = attemptGeneration(test, parameterType,
 					position, recursionDepth,
 					allowNull, generatorRefToExclude, canUseMocks, canReuseExistingVariables);
@@ -2347,6 +2353,8 @@ public class TestFactory {
 	}
 
 
+	// [EMMA] This method is used to insert random statements into the test case
+	// insertRandomStatement, insertRandomCall, and satisfyParameters are responsible for creating new test inputs
 	/**
 	 * Inserts one or perhaps multiple random statements into the given {@code test}. Callers
 	 * have to specify the position of the last valid statement of {@code test} by supplying an
@@ -2365,6 +2373,7 @@ public class TestFactory {
 		return rs.insertStatement(test, lastPosition);
 	}
 
+	// [EMMA] This method might handle passing in potentially bug triggering input
 	/**
 	 * Satisfies a list of parameters by reusing or creating variables. Returns a list of references
 	 * to the objects or values . If there are no parameters, simply returns the empty list. If
@@ -2427,6 +2436,7 @@ public class TestFactory {
 				logger.debug("Cannot re-use variables: attempt at creating new one");
 				var = createVariable(test, parameterType, position, recursionDepth, callee, allowNullForParameter,
 						excludeCalleeGenerators, true, false);
+						// [EMMA] Create variable 
 				if (var == null) {
 					throw new ConstructionFailedException(
 							"Failed to create variable for type " + parameterType + " at position " + position);

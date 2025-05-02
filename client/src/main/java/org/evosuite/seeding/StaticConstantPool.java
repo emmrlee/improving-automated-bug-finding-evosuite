@@ -33,6 +33,7 @@ import org.objectweb.asm.Type;
  * @author Gordon Fraser
  * 
  */
+// [EMMA] Maintains fixed set of values in constant pool
 public class StaticConstantPool implements ConstantPool {
 
 	private final Set<String> stringPool = Collections.synchronizedSet(new LinkedHashSet<>());

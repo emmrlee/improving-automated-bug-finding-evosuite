@@ -26,6 +26,7 @@ import org.objectweb.asm.Type;
  * @author Gordon Fraser
  * 
  */
+// [EMMA] This is the base interface for getting random values of different types
 public interface ConstantPool {
 
 	/**

@@ -135,6 +135,7 @@ public abstract class PrimitiveStatement<T> extends AbstractStatement {
         if (clazz == boolean.class) {
             statement = new BooleanPrimitiveStatement(tc);
         } else if (clazz == int.class) {
+            // [EMMA] These Int, Char, Long, etc. primitve statements draw from the constant pool
             statement = new IntPrimitiveStatement(tc);
         } else if (clazz == char.class) {
             statement = new CharPrimitiveStatement(tc);

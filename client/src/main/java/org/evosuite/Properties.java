@@ -151,6 +151,7 @@ public class Properties {
 	@DoubleValue(min = 0.0, max = 1.0)
 	public static double PRIMITIVE_REUSE_PROBABILITY = 0.5;
 
+	// [EMMA] Probability to use a primitive from the pool rather than a random value
 	@Parameter(key = "primitive_pool", group = "Test Creation", description = "Probability to use a primitive from the pool rather than a random value")
 	@DoubleValue(min = 0.0, max = 1.0)
 	public static double PRIMITIVE_POOL = 0.5;

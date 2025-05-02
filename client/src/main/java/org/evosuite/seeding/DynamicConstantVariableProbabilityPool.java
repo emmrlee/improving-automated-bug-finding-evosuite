@@ -26,6 +26,7 @@ import org.objectweb.asm.Type;
 /**
  * Created by gordon on 06/01/2017.
  */
+// [EMMA] Allows values to be added into pools during runtime
 public class DynamicConstantVariableProbabilityPool implements ConstantPool {
 
     private final RandomAccessQueue<String> stringPool = new FrequencyBasedRandomAccessQueue<>();

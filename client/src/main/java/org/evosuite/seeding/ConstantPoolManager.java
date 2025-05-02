@@ -27,6 +27,7 @@ import org.evosuite.utils.Randomness;
  * @author Gordon Fraser
  * 
  */
+// [EMMA] Manages multiple constant pools; handles probabilities for selecting from different pools
 public class ConstantPoolManager {
 
 	private static ConstantPoolManager instance = new ConstantPoolManager();
@@ -39,6 +40,7 @@ public class ConstantPoolManager {
 	 * easier to run
 	 */
 	private static final int DYNAMIC_POOL_INDEX = 2;
+	private static final int WEIRD_CASE_POOL_INDEX = 3;
 
 	private ConstantPoolManager() {
 		init();
@@ -46,13 +48,20 @@ public class ConstantPoolManager {
 
 	private void init() {
 		if(!Properties.VARIABLE_POOL) {
-			pools = new ConstantPool[]{new StaticConstantPool(), new StaticConstantPool(),
-					new DynamicConstantPool()};
+			pools = new ConstantPool[]{
+				new StaticConstantPool(),           // SUT constants
+				new StaticConstantPool(),           // non-SUT constants
+				new DynamicConstantPool(),          // dynamic constants
+				new WeirdCasePool()                 // your weird case pool
+			};
 		} else {
-			pools = new ConstantPool[]{new StaticConstantVariableProbabilityPool(), new StaticConstantVariableProbabilityPool(),
-					new DynamicConstantVariableProbabilityPool()};
+			pools = new ConstantPool[]{
+				new StaticConstantVariableProbabilityPool(),
+				new StaticConstantVariableProbabilityPool(),
+				new DynamicConstantVariableProbabilityPool(),
+				new WeirdCasePool()
+			};
 		}
-
 		initDefaultProbabilities();
 	}
 
@@ -98,6 +107,10 @@ public class ConstantPoolManager {
 
 	public void addDynamicConstant(Object value) {
 		pools[DYNAMIC_POOL_INDEX].add(value);
+	}
+
+	public void addWeirdCaseConstant(Object value) {
+		pools[WEIRD_CASE_POOL_INDEX].add(value);
 	}
 
 	public ConstantPool getConstantPool() {

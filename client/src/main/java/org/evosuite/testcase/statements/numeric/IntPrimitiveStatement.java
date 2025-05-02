@@ -101,6 +101,7 @@ public class IntPrimitiveStatement extends NumericalPrimitiveStatement<Integer> 
 			value = (int)(Randomness.nextGaussian() * Properties.MAX_INT) ;
 		}
 		else {
+			// [EMMA] Get random int from constant pool!
 			ConstantPool constantPool = ConstantPoolManager.getInstance().getConstantPool();
 			value = constantPool.getRandomInt();
 		}
