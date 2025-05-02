@@ -15,6 +15,37 @@ public class WeirdCasePool implements ConstantPool {
     private final Set<Double> doublePool = Collections.synchronizedSet(new LinkedHashSet<>());
     private final Set<Long> longPool = Collections.synchronizedSet(new LinkedHashSet<>());
     private final Set<Float> floatPool = Collections.synchronizedSet(new LinkedHashSet<>());
+
+    public WeirdCasePool() {
+        /*
+		 * all pools HAVE to be non-empty 
+		 */
+
+        // [EMMA] LLM will generate weird cases, so we need to add them to the pool
+		// stringPool.add("");
+
+		// if (Properties.TARGET_CLASS != null && !Properties.TARGET_CLASS.isEmpty()) {
+		// 	typePool.add(Type.getObjectType(Properties.TARGET_CLASS));
+		// } else {
+		// 	typePool.add(Type.getType(Object.class));
+		// }
+
+		// intPool.add(0);
+		// intPool.add(1);
+		// intPool.add(-1);
+
+		// longPool.add(0L);
+		// longPool.add(1L);
+		// longPool.add(-1L);
+
+		// floatPool.add(0.0f);
+		// floatPool.add(1.0f);
+		// floatPool.add(-1.0f);
+
+		// doublePool.add(0.0);
+		// doublePool.add(1.0);
+		// doublePool.add(-1.0);
+    }
     
     // Implement required methods
     @Override
