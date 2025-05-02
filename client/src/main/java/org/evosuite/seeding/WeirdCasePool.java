@@ -22,29 +22,29 @@ public class WeirdCasePool implements ConstantPool {
 		 */
 
         // [EMMA] LLM will generate weird cases, so we need to add them to the pool
-		// stringPool.add("");
+		stringPool.add("");
 
-		// if (Properties.TARGET_CLASS != null && !Properties.TARGET_CLASS.isEmpty()) {
-		// 	typePool.add(Type.getObjectType(Properties.TARGET_CLASS));
-		// } else {
-		// 	typePool.add(Type.getType(Object.class));
-		// }
+		if (Properties.TARGET_CLASS != null && !Properties.TARGET_CLASS.isEmpty()) {
+			typePool.add(Type.getObjectType(Properties.TARGET_CLASS));
+		} else {
+			typePool.add(Type.getType(Object.class));
+		}
 
-		// intPool.add(0);
-		// intPool.add(1);
-		// intPool.add(-1);
+		intPool.add(0);
+		intPool.add(1);
+		intPool.add(-1);
 
-		// longPool.add(0L);
-		// longPool.add(1L);
-		// longPool.add(-1L);
+		longPool.add(0L);
+		longPool.add(1L);
+		longPool.add(-1L);
 
-		// floatPool.add(0.0f);
-		// floatPool.add(1.0f);
-		// floatPool.add(-1.0f);
+		floatPool.add(0.0f);
+		floatPool.add(1.0f);
+		floatPool.add(-1.0f);
 
-		// doublePool.add(0.0);
-		// doublePool.add(1.0);
-		// doublePool.add(-1.0);
+		doublePool.add(0.0);
+		doublePool.add(1.0);
+		doublePool.add(-1.0);
     }
     
     // Implement required methods
