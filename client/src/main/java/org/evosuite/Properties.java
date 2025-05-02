@@ -158,7 +158,11 @@ public class Properties {
 
 	@Parameter(key = "dynamic_pool", group = "Test Creation", description = "Probability to use a primitive from the dynamic pool rather than a random value")
 	@DoubleValue(min = 0.0, max = 1.0)
-	public static double DYNAMIC_POOL = 0.5;
+	public static double DYNAMIC_POOL = 0.3; // [EMMA] I bumped it down from 0.5 to 0.3
+
+	@Parameter(key = "weird_case_pool", group = "Test Creation", description = "Probability to use a primitive from the weird case pool rather than a random value")
+	@DoubleValue(min = 0.0, max = 1.0)
+	public static double WEIRD_CASE_POOL_WEIGHT = 0.2;
 
 	@Parameter(key = "variable_pool", group = "Test Creation", description = "Set probability of a constant based on the number of occurrences")
 	@DoubleValue(min = 0.0, max = 1.0)

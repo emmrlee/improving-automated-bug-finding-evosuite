@@ -68,11 +68,12 @@ public class ConstantPoolManager {
 	private void initDefaultProbabilities() {
 		probabilities = new double[pools.length];
 //		double p = 1d / probabilities.length;
-		double p = (1d - Properties.DYNAMIC_POOL) / (probabilities.length - 1);
+		double p = (1d - (Properties.DYNAMIC_POOL + Properties.WEIRD_CASE_POOL)) / (probabilities.length - 1);
 		for (int i = 0; i < probabilities.length; i++) {
 			probabilities[i] = p;
 		}
 		probabilities[DYNAMIC_POOL_INDEX] = Properties.DYNAMIC_POOL;
+		probabilities[WEIRD_CASE_POOL_INDEX] = Properties.WEIRD_CASE_POOL;
 		normalizeProbabilities();
 	}
 
