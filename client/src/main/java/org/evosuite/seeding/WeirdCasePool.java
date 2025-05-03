@@ -1,10 +1,12 @@
 // Group 3
-
+package org.evosuite.seeding;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
+import org.evosuite.Properties;
+import org.evosuite.utils.LoggingUtils;
+import org.evosuite.utils.Randomness;
 import org.objectweb.asm.Type;
 
 public class WeirdCasePool implements ConstantPool {
