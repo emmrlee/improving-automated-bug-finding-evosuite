@@ -1,7 +1,7 @@
-class=org.apache.commons.math3.optimization.direct.CMAESOptimizer
-project_cp=/home/cfee3/software/project/BUG18/target/classes
-D4J_SEED=29374
-budget=600
+class=org.apache.commons.math3.util.FastMath
+project_cp=/home/cfee3/software/project/BUG15/target/classes
+D4J_SEED=934759
+budget=120
 DIR_OUTPUT=out/
 
 
