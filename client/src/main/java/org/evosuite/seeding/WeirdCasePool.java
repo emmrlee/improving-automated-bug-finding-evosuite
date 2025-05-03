@@ -47,6 +47,71 @@ public class WeirdCasePool implements ConstantPool {
 		doublePool.add(0.0);
 		doublePool.add(1.0);
 		doublePool.add(-1.0);
+
+		//BUG 14 RESPONSE 
+
+		 // === DOUBLE edge cases: 5 most likely bug-triggering ===
+		 doublePool.add(Double.NaN);                // Not a Number — often crashes or causes NaN propagation
+		 doublePool.add(Double.POSITIVE_INFINITY);  // Infinity — can cause overflow or invalid matrix entries
+		 doublePool.add(Double.MAX_VALUE);          // Largest representable number — may cause overflow or instability
+		 doublePool.add(Double.MIN_VALUE);          // Smallest positive — triggers underflow/precision loss
+		 doublePool.add(-1e300);                    // Large negative number — checks for instability or sign issues
+
+		 
+		 //BUG 15 RESPONSE
+
+		 // Ensure at least one item in each pool (minimal filler for others)
+		 stringPool.add("test");	
+		 intPool.add(1);
+		 longPool.add(1L);
+		 floatPool.add(1.0f);
+	 
+		 // --- 5 Bug-Triggering Doubles ---
+		 doublePool.add(4503599627370496.0);       // 2^52 — previous threshold
+		 doublePool.add(9007199254740992.0);       // 2^53 — new threshold
+		 doublePool.add(-9007199254740992.0);      // -2^53 — test x < 0 with neg y
+		 doublePool.add(9007199254740993.0);       // 2^53 + 1 — just above new threshold
+		 doublePool.add(Double.NaN);               // special-case handling (should propagate NaN)
+
+		 //BUG 16 RESPONSES 
+
+		// Add bug-triggering double values
+		doublePool.add(709.78);             // Just below LOG_MAX_VALUE
+		doublePool.add(709.79);             // Just above LOG_MAX_VALUE, may trigger overflow guard
+		doublePool.add(1e308);              // Near Double.MAX_VALUE, extreme overflow risk
+		doublePool.add(Double.MIN_VALUE);   // Smallest positive subnormal, tests underflow and denormals
+		doublePool.add(Double.NaN);         // Not-a-number input, test undefined behavior
+
+
+		//BUG 18 RESPONSES 
+		// Add concrete bug-triggering doubles
+		doublePool.add(1e-300);         // Very small positive value → triggers underflow/near-zero division
+		doublePool.add(-1e-300);        // Same as above, but negative
+		doublePool.add(1e308);          // Near Double.MAX_VALUE → may cause overflow when multiplied
+		doublePool.add(1.00000000000001); // Precision test near 1 → loss of significance risk
+		doublePool.add(1e-16);          // Tiny diff → dangerous when used as divisor (x / diff)
+
+
+		//BUG 9 RESPONSES 
+
+		// 1. Very large magnitude (test for overflow or subtraction imprecision)
+		doublePool.add(Double.MAX_VALUE);  // ~1.8E308
+
+		// 2. Very small magnitude (underflow and loss of precision when subtracting)
+		doublePool.add(Double.MIN_VALUE);  // ~4.9E-324 (positive, closest to 0)
+
+		// 3. Negative zero (can behave differently than positive 0 in subtraction)
+		doublePool.add(-0.0);
+
+		// 4. NaN (not equal to anything, can cause logic errors in comparisons)
+		doublePool.add(Double.NaN);
+
+		// 5. Positive infinity (may propagate through subtraction if unchecked)
+		doublePool.add(Double.POSITIVE_INFINITY);
+
+	 
+		 
+	 
     }
     
     // Implement required methods

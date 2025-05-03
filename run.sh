@@ -4,7 +4,7 @@ D4J_SEED=42
 budget=600
 DIR_OUTPUT=out/
 
-java -cp evosuite-shaded-1.1.0.jar shaded.org.evosuite.EvoSuite  \
+java -cp evosuite-TAKE-1.jar shaded.org.evosuite.EvoSuite  \
     -class $class \
     -projectCP $project_cp \
     -seed $D4J_SEED \
