@@ -1,6 +1,6 @@
-class=org.apache.commons.math3.util.MathUtils
-project_cp= #TODO: REPLACE THIS WITH THE PATH RETURNED BY RUNNING: defects4j  export -p cp.compile -w "<path to check-out buggy code>" 2>/dev/null 
-D4J_SEED=42
+class=org.apache.commons.math3.optimization.direct.CMAESOptimizer
+project_cp=/home/cfee3/software/project/BUG18/target/classes
+D4J_SEED=29374
 budget=600
 DIR_OUTPUT=out/
 
