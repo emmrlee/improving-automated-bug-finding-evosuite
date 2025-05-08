@@ -58,7 +58,7 @@ public class WeirdCasePool implements ConstantPool {
 		 doublePool.add(-1e300);                    // Large negative number — checks for instability or sign issues
 
 		 
-		 //BUG 15 RESPONSE
+		//BUG 15 RESPONSE
 
 		 // Ensure at least one item in each pool (minimal filler for others)
 		 stringPool.add("test");	
@@ -73,7 +73,7 @@ public class WeirdCasePool implements ConstantPool {
 		 doublePool.add(9007199254740993.0);       // 2^53 + 1 — just above new threshold
 		 doublePool.add(Double.NaN);               // special-case handling (should propagate NaN)
 
-		 //BUG 16 RESPONSES 
+		//BUG 16 RESPONSES 
 
 		// Add bug-triggering double values
 		doublePool.add(709.78);             // Just below LOG_MAX_VALUE
@@ -109,8 +109,31 @@ public class WeirdCasePool implements ConstantPool {
 		// 5. Positive infinity (may propagate through subtraction if unchecked)
 		doublePool.add(Double.POSITIVE_INFINITY);
 
-	 
-		 
+
+		//BUG 3 RESPONSES
+		doublePool.add(1e308);        // Near Double.MAX_VALUE, can cause overflow
+		doublePool.add(1e-308);       // Near Double.MIN_NORMAL, can cause underflow
+		doublePool.add(-0.0);         // Edge case: negative zero
+		doublePool.add(Double.NaN);   // Triggers fallback path
+		doublePool.add(1e16);         // Large positive for cancellation test
+		doublePool.add(-1e16);        // Large negative to cancel above
+
+		//BUG 8 RESPONSES
+
+		// --- Integers likely to trigger exceptions in sampleSize ---
+		intPool.add(0);       // triggers NotStrictlyPositiveException
+		intPool.add(-1);      // same as above, ensures robust negative handling
+		intPool.add(1);       // smallest legal value
+		intPool.add(Integer.MAX_VALUE);  // tests memory/size limits
+		intPool.add(Integer.MIN_VALUE);  // pathological case for underflow logic
+
+		// --- Doubles likely to break probability assumptions ---
+		doublePool.add(-0.1);           // negative → NotPositiveException
+		doublePool.add(0.0);            // combined with others, can cause sum to zero
+		doublePool.add(Double.POSITIVE_INFINITY); // MathIllegalArgumentException
+		doublePool.add(Double.NaN);     // invalid input → NaN propagation
+		doublePool.add(1e-308);         // very small → underflow, rounding error
+
 	 
     }
     

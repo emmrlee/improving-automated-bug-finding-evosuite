@@ -1,5 +1,5 @@
-class=org.apache.commons.math3.util.FastMath
-project_cp=/home/cfee3/software/project/BUG15/target/classes
+class=org.apache.commons.math3.util.MathArrays
+project_cp=/home/cfee3/software/project/BUG03/target/classes
 D4J_SEED=934759
 budget=120
 DIR_OUTPUT=out/
